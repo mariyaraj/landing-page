@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_container
+    environment:
+      POSTGRES_USER: postgres       # Benutzername für den Zugriff auf die Datenbank
+      POSTGRES_PASSWORD: postgres    # Passwort für den Benutzer
+      POSTGRES_DB: companydb         # Name der Datenbank
+    ports:
+      - "5432:5432"                  # Der Port, auf den PostgreSQL zugreifen kann
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persistentes Volume für Datenbankdaten
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_container
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com   # Benutzername für den Zugriff auf pgAdmin
+      PGADMIN_DEFAULT_PASSWORD: admin            # Passwort für pgAdmin
+    ports:
+      - "8080:80"                                # Der Port, auf den pgAdmin zugreifen kann
+    depends_on:
+      - postgres                                 # pgAdmin startet erst, wenn PostgreSQL läuft
+
+volumes:
+  postgres_data:

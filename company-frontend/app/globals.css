@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-blue: #003479;
+  --brand-cyan: #00c2cb;
+  --text-light: #ffffff;
+  --background-overlay: rgba(255, 255, 255, 0.1);
+}
+
+.background {
+  position: fixed; /* Das Bild bleibt fixiert */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1; /* Hintergrund hinter den anderen Inhalten */
+}
+
+@layer components {
+  /* Glas-Effekt für Karten */
+  .glass-effect {
+    @apply bg-white/10 backdrop-blur-md border border-white/10;
+  }
+
+
+  
+    /* Orange Glas-Effekt */
+    .glass-effect-orange {
+      @apply bg-orange-600/30 backdrop-blur-md border border-orange-300/30;
+    }
+  /* Button Styling mit responsiven Größen */
+  .btn-primary {
+    @apply bg-[#00c2cb] text-white font-bold 
+           px-3 py-1.5 text-sm sm:px-4 sm:py-2 sm:text-base
+           rounded-lg transition-all duration-300
+           hover:opacity-90 hover:shadow-lg
+           active:transform active:scale-95
+           focus:outline-none focus:ring-2 focus:ring-[#00c2cb]/50;
+  }
+
+  /* Hover-Effekt für Karten mit besserer Mobile-Unterstützung */
+  .hover-card {
+    @apply transition-all duration-300 ease-in-out 
+           active:transform active:scale-[0.98]
+           sm:hover:scale-[1.02] sm:hover:shadow-xl
+           touch-manipulation;
+  }
+
+  /* Animation für "Weitere Infos" mit Performance-Optimierung */
+  .animate-fade-in {
+    @apply transition-all duration-300 ease-in-out;
+    will-change: transform, opacity;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  /* Glass Card spezifische Styles */
+  .glass-card {
+    @apply glass-effect p-4 sm:p-6 
+           rounded-xl sm:rounded-2xl
+           text-sm sm:text-base
+           space-y-2 sm:space-y-3;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Optimierte Footer Styles */
+footer {
+  @apply relative z-10 w-full py-4 sm:py-6;
+}
+
+footer a {
+  @apply transition-colors duration-200
+         text-sm sm:text-base
+         hover:text-[#00c2cb];
+}
+
+/* Mobile Optimierungen */
+@media (max-width: 640px) {
+  .glass-effect {
+    @apply backdrop-blur-sm; /* Leichtere Blur-Effekte für bessere Performance */
+  }
+
+  .hover-card {
+    @apply active:scale-[0.98]; /* Touch-freundlicher Feedback-Effekt */
+  }
+}
+
+/* Reduzierte Bewegung für Barrierefreiheit */
+@media (prefers-reduced-motion: reduce) {
+  .hover-card {
+    @apply transform-none transition-none;
+  }
+  
+  .animate-fade-in {
+    animation: none;
+    @apply opacity-100;
+    transform: none;
+  }
+}

@@ -1,0 +1,20 @@
+# public/robots.txt
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.json$
+Disallow: /*_buildManifest.js$
+Disallow: /*_middlewareManifest.js$
+Disallow: /*_ssgManifest.js$
+Disallow: /_next/
+
+# Sitemap Eintrag
+Sitemap: http://ai2connect-do.com/sitemap.xml
+
+# Crawl-delay Einstellung
+Crawl-delay: 10
+
+# Host
+Host: http://ai2connect-do.com
