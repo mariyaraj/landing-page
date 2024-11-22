@@ -8,7 +8,8 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const createCompany = async (companyData: Company): Promise<Company> => {
   try {
-    const response = await fetch(`${API_URL}/api/companies`, {
+    console.log('Attempting to fetch from:', process.env.NEXT_PUBLIC_API_URL);
+    const response = await fetch(`${API_URL}/companies`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
