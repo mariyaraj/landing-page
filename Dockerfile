@@ -12,7 +12,7 @@ COPY company-frontend/package*.json ./
 RUN npm install
 COPY company-frontend .
 ENV PORT=3001
-ENV NEXT_PUBLIC_API_URL=http://localhost:8082
+ENV NEXT_PUBLIC_API_URL=/api
 RUN npm run build
 
 # Final stage

@@ -1,7 +1,7 @@
 // app/api/companies/route.ts
 import { NextResponse } from 'next/server';
 
-const API_URL = 'http://localhost:8082/api/companies';
+const API_URL = '/api/companies';
 
 // Basis-Konfiguration für fetch
 const fetchConfig = {
