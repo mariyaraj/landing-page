@@ -5,34 +5,34 @@ export const CARDS: CardData[] = [
     id: 1,
     title: "Noch keine KI-Lösungen integriert?",
     description:
-      "In einer kostenlosen, individuellen Erstberatung ermitteln wir Deinen Bedarf. In Folgeterminen analysieren wir die entsprechenden Prozesse, zeigen maßgeschneiderte KI-Optimierungen und finden den idealen Partner für Deine Anforderungen.",
+      "In einer kostenlosen Erstberatung klären wir Ihren Bedarf, analysieren Ihre Prozesse und zeigen maßgeschneiderte KI-Optimierungen auf",
     buttonText: "Erstberatung buchen",
     type: "consultation",
-    className: "bg-blue-500/30", // Transparente blaue Farbe
+    className: "bg-gray-900/60 backdrop-blur-lg"
   },
   {
     id: 2,
-    title: "Du setzt schon KI ein?",
+    title: "Sie setzen schon KI ein?",
     description:
-      "Entdecke weitere Optimierungsmöglichkeiten für deine Geschäftsprozesse. Wir analysieren Dein Potenzial und vermitteln die idealen Partner für Deine nächsten Innovationsschritte.",
+      "Wir analysieren Ihr Potenzial und vermitteln den idealen Partner für Ihre Innovation",
     buttonText: "Termin buchen",
     type: "consultation",
-    className: "bg-blue-500/30", // Transparente blaue Farbe
+    className: "bg-blue-500/50 backdrop-blur", // Weniger transparent
   },
   {
     id: 3,
-    title: "Du bist Anbieter von KI-Lösungen?",
+    title: "Anbieter von KI-Lösungen?",
     description:
-      "Werden Sie Pilotpartner und präsentieren Sie Ihre KI-Expertise. Wir sorgen für die perfekte Verbindung zu Ihren zukünftigen Kunden.",
+      "Werden Sie unser Pilotpartner und gestalten Sie AI2Connect aktiv mit.",
     buttonText: "Jetzt bewerben",
     type: "application",
-    className: "bg-blue-500/30", // Transparente blaue Farbe
+    className: "bg-gray-900/90 backdrop-blur-lg",
   },
   {
     id: 4,
     title: "Die richtige KI-Verbindung für Logistik?",
     description:
-      "Sichern Sie sich jetzt Ihre Vorreiterrolle: Als Pilotunternehmen genießen Sie Sonderkonditionen und exklusive Vorteile – ob als KI-Anbieter oder -Suchender in der Logistikbranche.",
+      "Sichern Sie sich Ihre Vorreiterrolle mit exklusiven Vorteilen als Pilotunternehmen - für KI-Anbieter und Suchende in der Logistik",
     buttonText: "Jetzt bewerben",
     type: "application",
     className: "bg-orange-500/30", // Transparente orange Farbe

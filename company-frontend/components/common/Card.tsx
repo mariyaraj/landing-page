@@ -19,13 +19,13 @@ export const Card: React.FC<CardProps> = ({
   };
 
   const cardBackground = id === 4
-    ? 'bg-orange-400/25 backdrop-blur' 
+    ? 'bg-orange-400/25 backdrop-blur'
     : 'bg-white bg-opacity-10 backdrop-blur';
 
   // Dynamische Höhe für den Content-Bereich basierend auf Kartentyp
-  const contentHeight = id < 3 
-    ? 'calc(100% - 140px)' // Mehr Platz für Footer mit Checkbox
-    : 'calc(100% - 100px)'; // Weniger Platz nötig für Footer ohne Checkbox
+  const contentHeight = id < 3
+    ? 'calc(100% - 180px)' // Mehr Platz für Footer mit Checkbox
+    : 'calc(100% - 120px)'; // Weniger Platz nötig für Footer ohne Checkbox
 
   return (
     <div className={`
@@ -41,12 +41,15 @@ export const Card: React.FC<CardProps> = ({
     `}>
       <div className="relative w-full h-full">
         {/* Content area mit dynamischer Höhe */}
-        <div  role="article" 
+        <div role="article"
           aria-labelledby={`card-title-${id}`}
-          className="absolute top-0 left-0 right-0 p-8 overflow-hidden" 
+          className="absolute top-0 left-0 right-0 p-8 overflow-hidden"
           style={{ height: contentHeight }}
         >
-          <h2  id={`card-title-${id}`} className="text-2xl font-bold mb-4 text-white">{title}</h2>
+
+          <h2 id={`card-title-${id}`} className="text-2xl font-bold mb-4 text-white h-16 flex items-center">
+            {title}
+          </h2>
           <p className={`text-base text-white/90 overflow-hidden ${id < 3 ? 'line-clamp-7' : 'line-clamp-8'}`}>
             {description}
           </p>
@@ -70,17 +73,17 @@ export const Card: React.FC<CardProps> = ({
 
           <button
             className={`
-              w-full 
-              py-3 
-              px-4 
-              rounded 
-              transition-colors 
-              duration-200
-              ${consentGiven || id >= 3 
-                ? 'bg-orange-400/90 hover:bg-orange-400 text-white' 
+    w-full 
+    py-3 
+    px-4 
+    rounded 
+    transition-all 
+    duration-300
+    ${consentGiven || id >= 3
+                ? 'btn-primary'  // Nutzt die zentrale Klasse für Cyan-Buttons
                 : 'bg-gray-400 cursor-not-allowed text-white'
               }
-            `}
+  `}
             onClick={handleButtonClick}
             disabled={!consentGiven && id < 3}
           >

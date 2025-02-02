@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { Company, CompanySize, CompanyStatus } from '@/lib/types/shared';
 import { createCompany } from '@/lib/api';
+import Modal from './Modal';
+import PrivacyPolicy from './PrivacyPolicy';
 
 interface ApplicationContentProps {
     onClose: () => void;
@@ -32,7 +34,7 @@ export default function ApplicationContent({ onClose, type }: ApplicationContent
         useCase: '',
         technicalDetails: '',
         expectedBenefits: '',
-        attributes: [] as { name: string; value: string }[], // Hinzugefügt
+        attributes: [] as { name: string; value: string }[],
     });
 
     const [formStatus, setFormStatus] = useState<string | null>(null);
@@ -40,6 +42,10 @@ export default function ApplicationContent({ onClose, type }: ApplicationContent
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [privacyAccepted, setPrivacyAccepted] = useState(false);
+    const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
+
+    const openPrivacyModal = () => setIsPrivacyModalOpen(true);
+    const closePrivacyModal = () => setIsPrivacyModalOpen(false);
 
     useEffect(() => {
         resetForm();
@@ -60,7 +66,7 @@ export default function ApplicationContent({ onClose, type }: ApplicationContent
             useCase: '',
             technicalDetails: '',
             expectedBenefits: '',
-            attributes: [], // Hinzugefügt
+            attributes: [],
         });
         setFormStatus(null);
         setIsSubmitted(false);
@@ -75,29 +81,27 @@ export default function ApplicationContent({ onClose, type }: ApplicationContent
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
-    
+
         try {
-            // Attribute aus Formulardaten übernehmen
             const attributes = formData.attributes;
-    
-            // Sicherstellen, dass companySize definiert ist
+
             if (!formData.companySize) {
                 throw new Error('Company size is required');
             }
-    
+
             const companyData: Omit<Required<Company>, 'id' | 'createdAt' | 'updatedAt' | 'version'> = {
                 name: formData.company,
                 email: formData.email,
-                website: formData.website || '', // Standardwert verwenden
-                phone: formData.phone || '', // Standardwert verwenden
+                website: formData.website || '',
+                phone: formData.phone || '',
                 companySize: formData.companySize as CompanySize,
                 status: CompanyStatus.DRAFT,
                 attributes,
             };
+
             console.log('Attempting to fetch from:', process.env.NEXT_PUBLIC_API_URL);
-            // API-Aufruf
             await createCompany(companyData);
-    
+
             setIsSubmitted(true);
             setFormStatus('Bewerbung erfolgreich gesendet!');
         } catch (error) {
@@ -112,7 +116,7 @@ export default function ApplicationContent({ onClose, type }: ApplicationContent
     return (
         <div className="h-full">
             <div className="space-y-4">
-                <h2 className="text-xl font-bold text-[#003479] mb-6">
+                <h2 className="text-xl font-bold text-brand-blue mb-6">
                     {type === 'provider'
                         ? 'Bewerbung als KI-Anbieter'
                         : 'Bewerbung als Pilotunternehmen'}
@@ -124,7 +128,7 @@ export default function ApplicationContent({ onClose, type }: ApplicationContent
                     </div>
                 )}
 
-                {formStatus && <p className="mb-4 text-[#003479] font-semibold">{formStatus}</p>}
+                {formStatus && <p className="mb-4 text-brand-blue font-semibold">{formStatus}</p>}
 
                 {!isSubmitted ? (
                     <form onSubmit={handleSubmit} className="space-y-4">
@@ -332,27 +336,36 @@ export default function ApplicationContent({ onClose, type }: ApplicationContent
                             />
                         </div>
 
-                        {/* Kontrollkästchen für die Datenschutzerklärung */}
-                        <div className="mt-4">
+                        <div className="flex items-center mt-4">
                             <input
                                 type="checkbox"
-                                id="privacyConsent"
+                                id="privacyAccepted"
                                 checked={privacyAccepted}
                                 onChange={(e) => setPrivacyAccepted(e.target.checked)}
                                 className="mr-2"
                             />
-                            <label htmlFor="privacyConsent" className="text-gray-700 text-sm">
-                                Ich habe die{" "}
-                                <a
-                                    href="/datenschutz"
-                                    target="_blank"
-                                    className="text-[#00c2cb] underline hover:text-[#007d87]"
+                            <label htmlFor="privacyAccepted" className="text-sm text-gray-700">
+                                Ich akzeptiere die{' '}
+                                <button
+                                    type="button"
+                                    onClick={openPrivacyModal}
+                                    className="text-brand-cyan hover:underline"
                                 >
-                                    Datenschutzerklärung
-                                </a>{" "}
-                                gelesen und stimme der Verarbeitung meiner Daten zu.
+                                    Datenschutzrichtlinien
+                                </button>
                             </label>
                         </div>
+
+                        {/* Datenschutz-Modal */}
+                        <Modal
+                            isOpen={isPrivacyModalOpen}
+                            onClose={closePrivacyModal}
+                            title="Datenschutzerklärung"
+                            maxWidth="max-w-4xl"
+                            height="h-3/4"
+                        >
+                            <PrivacyPolicy />
+                        </Modal>
 
                         <div className="flex justify-end gap-4 mt-6">
                             <button
@@ -361,18 +374,14 @@ export default function ApplicationContent({ onClose, type }: ApplicationContent
                                     resetForm();
                                     onClose();
                                 }}
-                                className="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 transition-colors"
+                                className="btn-secondary"
                             >
                                 Abbrechen
                             </button>
                             <button
                                 type="submit"
                                 disabled={!privacyAccepted}
-                                className={`px-4 py-2 rounded transition-all
-    ${privacyAccepted
-                                        ? 'bg-[#00c2cb] text-white hover:opacity-90 cursor-pointer'
-                                        : 'bg-gray-400 text-gray-300 cursor-not-allowed'
-                                    }`}
+                                className={`btn-primary ${!privacyAccepted ? 'opacity-50 cursor-not-allowed' : ''}`}
                             >
                                 Bewerbung absenden
                             </button>
@@ -380,12 +389,12 @@ export default function ApplicationContent({ onClose, type }: ApplicationContent
                     </form>
                 ) : (
                     <div className="text-center py-8">
-                        <p className="text-[#003479] font-semibold mb-4">
+                        <p className="text-brand-blue font-semibold mb-4">
                             Vielen Dank für Ihre Bewerbung! Wir werden uns in Kürze bei Ihnen melden.
                         </p>
                         <button
                             onClick={onClose}
-                            className="bg-[#00c2cb] text-white px-4 py-2 rounded hover:opacity-90 transition-opacity"
+                            className="btn-primary"
                         >
                             Schließen
                         </button>
@@ -395,12 +404,11 @@ export default function ApplicationContent({ onClose, type }: ApplicationContent
                 {loading && (
                     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                         <div className="bg-white p-4 rounded-lg">
-                            <p className="text-[#003479]">Bewerbung wird gesendet...</p>
+                            <p className="text-brand-blue">Bewerbung wird gesendet...</p>
                         </div>
                     </div>
                 )}
             </div>
         </div>
     );
-
 }

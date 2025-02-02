@@ -6,11 +6,11 @@
   --brand-blue: #003479;
   --brand-cyan: #00c2cb;
   --text-light: #ffffff;
-  --background-overlay: rgba(255, 255, 255, 0.1);
+  --background-overlay: rgba(0, 0, 0, 0.4);
 }
 
 .background {
-  position: fixed; /* Das Bild bleibt fixiert */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -19,63 +19,61 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  z-index: -1; /* Hintergrund hinter den anderen Inhalten */
+  z-index: -1;
+}
+
+.background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--background-overlay);
+  z-index: 0;
 }
 
 @layer components {
-  /* Glas-Effekt für Karten */
-  .glass-effect {
-    @apply bg-white/10 backdrop-blur-md border border-white/10;
-  }
-
-
-  
-    /* Orange Glas-Effekt */
-    .glass-effect-orange {
-      @apply bg-orange-600/30 backdrop-blur-md border border-orange-300/30;
-    }
-  /* Button Styling mit responsiven Größen */
   .btn-primary {
-    @apply bg-[#00c2cb] text-white font-bold 
-           px-3 py-1.5 text-sm sm:px-4 sm:py-2 sm:text-base
-           rounded-lg transition-all duration-300
-           hover:opacity-90 hover:shadow-lg
-           active:transform active:scale-95
-           focus:outline-none focus:ring-2 focus:ring-[#00c2cb]/50;
+    background-color: var(--brand-cyan); /* Cyan Hintergrund */
+    color: #ffffff; 
+    font-weight: bold;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    border-radius: 0.5rem;
+    transition: all 300ms;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); /* Heller Schatten für bessere Lesbarkeit */
   }
 
-  /* Hover-Effekt für Karten mit besserer Mobile-Unterstützung */
-  .hover-card {
-    @apply transition-all duration-300 ease-in-out 
-           active:transform active:scale-[0.98]
-           sm:hover:scale-[1.02] sm:hover:shadow-xl
-           touch-manipulation;
+  .btn-primary:hover {
+    background-color: #009da6; /* Dunkleres Cyan */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Kräftigerer Schatten */
   }
 
-  /* Animation für "Weitere Infos" mit Performance-Optimierung */
-  .animate-fade-in {
-    @apply transition-all duration-300 ease-in-out;
-    will-change: transform, opacity;
-    animation: fadeIn 0.3s ease-in-out;
+  .btn-primary:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(0, 194, 203, 0.8);
+  }
+  .btn-secondary {
+    background-color: var(--brand-blue);
+    color: var(--text-light);
+    font-weight: bold;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    border-radius: 0.5rem;
+    transition: all 300ms;
   }
 
-  /* Glass Card spezifische Styles */
-  .glass-card {
-    @apply glass-effect p-4 sm:p-6 
-           rounded-xl sm:rounded-2xl
-           text-sm sm:text-base
-           space-y-2 sm:space-y-3;
+  .btn-secondary:hover {
+    opacity: 0.9;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
-}
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
+  .btn-secondary:active {
+    transform: scale(0.95);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .btn-secondary:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 52, 121, 0.5);
   }
 }
 
@@ -111,5 +109,17 @@ footer a {
     animation: none;
     @apply opacity-100;
     transform: none;
+  }
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

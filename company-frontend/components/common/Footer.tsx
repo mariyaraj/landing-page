@@ -4,10 +4,19 @@ import PrivacyPolicy from './PrivacyPolicy';
 import ContactContent from './ContactContent';
 import ImpressumContent from './ImpressumContent';
 import { FaLinkedin } from 'react-icons/fa';
+import Script from 'next/script';
+
+const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-XXXXXXXXXX';
+
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
 
 export const Footer = () => {
   const [isPrivacyOpen, setPrivacyOpen] = useState(false);
- 
+
   const [isImpressumOpen, setImpressumOpen] = useState(false);
 
   const [isContactOpen, setContactOpen] = useState(false);
@@ -22,6 +31,25 @@ export const Footer = () => {
 
   return (
     <>
+      {/* Google Analytics */}
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+      />
+      <Script
+        id="google-analytics"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_TRACKING_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
+        }}
+      />
       <footer className="w-full bg-[#003479]/80 backdrop-blur-sm py-2">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center text-sm">
@@ -56,11 +84,19 @@ export const Footer = () => {
         <ImpressumContent />
       </Modal>
 
-         {/* Kontakt-Modal ohne unteren Schließen-Button */}
-         <Modal isOpen={isContactOpen} onClose={closeContact} title="Kontaktformular" maxWidth="max-w-xl" height="h-2/3" showCloseButton={false}>
+      {/* Kontakt-Modal ohne unteren Schließen-Button */}
+      <Modal
+        isOpen={isContactOpen}
+        onClose={closeContact}
+        title="Kontaktformular"
+        maxWidth="max-w-xl"
+        height="h-auto" /* Höhe automatisch anpassen */
+        showCloseButton={false}
+      >
         <ContactContent onClose={closeContact} />
+
       </Modal>
-     
+
     </>
   );
 };

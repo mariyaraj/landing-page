@@ -23,7 +23,7 @@ const PrivacyPolicy = () => (
       Beim Besuch unserer Website werden automatisch Informationen durch den Browser des Nutzers an den Server unserer Website gesendet. Diese Informationen umfassen die IP-Adresse, Datum und Uhrzeit des Zugriffs, Browsertyp und -version, verwendetes Betriebssystem sowie die Referrer-URL. Diese Daten sind technisch notwendig, um die Inhalte unserer Website korrekt auszuliefern und fallen zwingend bei Nutzung des Internets an.
     </p><br />
     <p>
-      Bei der Nutzung unseres Terminbuchungssystems (z. B. SimplyBook.me) werden folgende personenbezogene Daten erhoben: Name, E-Mail-Adresse, Telefonnummer (falls angegeben) sowie gebuchte Dienstleistung und Terminzeit. Diese Daten dienen ausschließlich der Terminvereinbarung und -verwaltung.
+      Bei der Nutzung unseres Terminbuchungssystems (z. B. Appointlet) werden folgende personenbezogene Daten erhoben: Name, E-Mail-Adresse, Telefonnummer (falls angegeben) sowie gebuchte Dienstleistung und Terminzeit. Diese Daten dienen ausschließlich der Terminvereinbarung und -verwaltung.
     </p><br />
     <p>
       Wenn sich Unternehmen als Pilotkunden oder Anbieter über unsere Website bewerben, erheben und speichern wir die von Ihnen angegebenen Informationen, wie Unternehmensname, Ansprechpartner, E-Mail-Adresse, Telefonnummer, Unternehmensbeschreibung und sonstige Angaben, die Sie uns über das Bewerbungsformular mitteilen. Diese Daten werden ausschließlich für die Auswahl und Kontaktaufnahme im Rahmen der Pilotphasen und Anbieterregistrierung genutzt.
@@ -31,12 +31,12 @@ const PrivacyPolicy = () => (
 
     <p><strong>3. Weitergabe von Daten</strong></p><br />
     <p>
-      Eine Übermittlung der persönlichen Daten an Dritte findet nur dann statt, wenn die Einwilligung des Nutzers vorliegt oder dies gesetzlich zulässig ist. Bei der Nutzung des Terminbuchungssystems werden die Daten an unseren Dienstleister SimplyBook.me übermittelt. SimplyBook.me ist vertraglich verpflichtet, die Daten gemäß den geltenden Datenschutzbestimmungen zu schützen und ausschließlich für die Terminbuchung zu verwenden. Die Daten von Pilotkunden und Anbietern werden nicht an Dritte weitergegeben, es sei denn, dies ist zur Erfüllung des Vertrags erforderlich oder gesetzlich vorgeschrieben.
+      Eine Übermittlung der persönlichen Daten an Dritte findet nur dann statt, wenn die Einwilligung des Nutzers vorliegt oder dies gesetzlich zulässig ist. Bei der Nutzung des Terminbuchungssystems werden die Daten an unseren Dienstleister Appointlet übermittelt. Appointlet ist vertraglich verpflichtet, die Daten gemäß den geltenden Datenschutzbestimmungen zu schützen und ausschließlich für die Terminbuchung zu verwenden. Die Daten von Pilotkunden und Anbietern werden nicht an Dritte weitergegeben, es sei denn, dies ist zur Erfüllung des Vertrags erforderlich oder gesetzlich vorgeschrieben.
     </p><br />
 
     <p><strong>4. Auftragsverarbeitung</strong></p><br />
     <p>
-      Für die Bereitstellung des Terminbuchungssystems haben wir einen Auftragsverarbeitungsvertrag (AVV) mit SimplyBook.me abgeschlossen, um die Einhaltung der DSGVO sicherzustellen.
+      Für die Bereitstellung des Terminbuchungssystems haben wir einen Auftragsverarbeitungsvertrag (AVV) mit Appointlet abgeschlossen, um die Einhaltung der DSGVO sicherzustellen.
     </p><br />
 
     <p><strong>5. Speicherdauer</strong></p><br />
@@ -67,9 +67,10 @@ const PrivacyPolicy = () => (
       Unsere Website verwendet Cookies. Cookies sind kleine Dateien, die auf Ihrem Endgerät gespeichert werden und Informationen über die Nutzung unserer Website enthalten. Nutzer können in den Einstellungen ihres Browsers selbst entscheiden, ob Cookies verwendet werden sollen oder nicht.
     </p><br />
     <p>
-      Bei der Nutzung des Terminbuchungssystems können zusätzlich Cookies durch den Dienstleister SimplyBook.me gesetzt werden. Weitere Informationen hierzu finden Sie in den Datenschutzbestimmungen von SimplyBook.me.
+      Bei der Nutzung des Terminbuchungssystems können zusätzlich Cookies durch den Dienstleister Appointlet gesetzt werden. Weitere Informationen hierzu finden Sie in den Datenschutzbestimmungen von Appointlet.
     </p>
-  </div>
+    </div>
+
 );
 
 export default PrivacyPolicy;
