@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { BookingPopupProps } from '@/lib/types/components';
 import ApplicationContent from './ApplicationContent';
-import Script from 'next/script';
 
 interface ExtendedBookingPopupProps extends BookingPopupProps {
   cardId?: number;
@@ -9,16 +8,17 @@ interface ExtendedBookingPopupProps extends BookingPopupProps {
 
 
 export function BookingPopup({ visible, onClose, cardId }: ExtendedBookingPopupProps) {
-  if (!visible) return null;
-
+  
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.gtag) {
+    if (visible && typeof window !== 'undefined' && window.gtag) {
       window.gtag('event', 'popup_opened', {
         event_category: 'BookingPopup',
         event_label: `Card ID: ${cardId}`,
       });
     }
-  }, [visible, cardId]);
+  }, [visible, cardId]); // Hook bleibt immer an derselben Stelle
+
+  if (!visible) return null;
 
   // Bestimme die Popup-Größe basierend auf dem Inhalt
   const isBookingWidget = cardId && cardId < 3;
