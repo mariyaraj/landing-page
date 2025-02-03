@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: keycloakdb
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - keycloak-network
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    environment:
+      DB_VENDOR: postgres
+      DB_ADDR: postgres
+      DB_DATABASE: keycloakdb
+      DB_USER: keycloak
+      DB_PASSWORD: password
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin        # Admin-Benutzername festlegen
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin        # Admin-Passwort festlegen
+    command: start-dev                          # Start im Entwicklungsmodus
+    ports:
+      - "8090:8080"                             # Keycloak auf Port 8090 verfügbar machen
+    depends_on:
+      - postgres
+    networks:
+      - keycloak-network
+
+volumes:
+  postgres_data:
+
+networks:
+  keycloak-network:
+    driver: bridge
