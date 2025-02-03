@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaLinkedin, FaPhone, FaEnvelope } from 'react-icons/fa';
+import Image from "next/image";
 
 interface ContactContentProps {
   onClose: () => void;
@@ -41,20 +42,22 @@ const ContactContent: React.FC<ContactContentProps> = ({ onClose }) => {
       {/* **Mittelblock: Foto, QR-Code & Kontaktdaten zentriert** */}
       <div className="flex flex-col items-center text-center mb-6">
         <div className="flex gap-4">
-          <img src="mariya.jpg" alt="Mariyas Foto" className="w-20 h-20 rounded-full border border-gray-300 shadow-md" />
-          <img 
-            src="https://api.qrserver.com/v1/create-qr-code/?data=BEGIN:VCARD%0AVERSION:3.0%0AFN:Mariya%20Rajendran%0AEMAIL:info@ai2connect-do.com%0ATEL:+49%20176%2062000818%0ATEL:+49%20231%2058097539%0AORG:AI2Connect%20in%20Planung%0AURL:https%3A%2F%2Fwww.ai2connect-do.com%0AEND:VCARD&size=150x150" 
-            alt="QR Code" 
-            className="w-20 h-20 border border-gray-300 shadow-md"
+          <Image src="/mariya.jpg" alt="Mariyas Foto" width={80} height={80} className="rounded-full border border-gray-300 shadow-md" />
+
+          <Image
+            src="https://api.qrserver.com/v1/create-qr-code/?data=..."
+            alt="QR Code"
+            width={80} height={80}
+            className="border border-gray-300 shadow-md"
           />
         </div>
         <p className="text-[#00c2cb] font-semibold mt-4">AI2Connect (in Planung)</p>
       </div>
 
       <div className="mb-6 text-center">
-        <a 
-          href="https://www.linkedin.com/in/mariya-rajendran-651240151" 
-          target="_blank" 
+        <a
+          href="https://www.linkedin.com/in/mariya-rajendran-651240151"
+          target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-center mb-2 text-blue-600 hover:underline"
         >
@@ -74,7 +77,7 @@ const ContactContent: React.FC<ContactContentProps> = ({ onClose }) => {
 
       {/* Kontaktformular linksbündig mit max-width 28rem */}
       {formStatus && <p className="mb-4 text-[#003479] font-semibold">{formStatus}</p>}
-      
+
       {!isSubmitted ? (
         <form onSubmit={handleSubmit} className="w-full max-w-[28rem] ml-6">
           <div className="mb-3">
@@ -97,7 +100,7 @@ const ContactContent: React.FC<ContactContentProps> = ({ onClose }) => {
 
           {/* Buttons rechtsbündig */}
           <div className="flex justify-end gap-4 mt-4">
-            <button type="button" onClick={onClose} 
+            <button type="button" onClick={onClose}
               className="bg-[#003479] text-white px-4 py-2 rounded hover:bg-[#002a5c] transition-all">
               Abbrechen
             </button>
