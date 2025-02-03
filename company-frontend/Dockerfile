@@ -1,5 +1,5 @@
 # Build stage
-FROM node:16 AS builder
+FROM node:20 AS builder
 WORKDIR /app
 COPY ./company-frontend/package*.json ./
 RUN npm install
